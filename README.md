@@ -66,13 +66,19 @@ Parameters:
 
 ## Data Collection
 
-The data collection component uses GitHub's API to gather comprehensive data about repositories, including:
+The data collection component (`data_collection/`) uses GitHub's API to gather comprehensive data about repositories, including:
 
 - Basic repository information
 - Issues and pull requests
 - Project boards and labels
 - Communication patterns and timelines
 - Contributor activities
+
+Key components:
+- `main.py`: Orchestrates the data collection process
+- `github_rate_limit_handler.py`: Manages GitHub API requests and rate limits
+- `data_collector.py`: Collects repository data with balanced sampling
+- `pm_classifier.py`: Classifies project management methodologies
 
 The `GitHubRateLimitHandler` ensures the code stays within GitHub API rate limits, preventing request failures.
 
@@ -96,20 +102,32 @@ Classification is based on multiple feature types:
 
 ## Data Analysis
 
-After classification, the research correlates project management approaches with success metrics like:
+The data analysis component (`data_analysis/`) processes and analyzes the collected data to identify patterns and correlations between project management approaches and success metrics. Key components include:
 
-- Issue closure rates
-- Community growth and engagement
-- Project longevity
-- Development continuity
-- Contributor satisfaction and retention
+- `analysis.py`: Core analysis functions for processing repository data
+- `visualization.py`: Tools for creating visualizations of analysis results
+- `statistical_tests.py`: Statistical analysis and hypothesis testing
+- `utils.py`: Utility functions for data processing and analysis
+
+The analysis focuses on:
+- Issue closure rates and patterns
+- Community growth and engagement metrics
+- Project longevity and development continuity
+- Contributor satisfaction and retention indicators
+- Statistical correlations between methodologies and success metrics
 
 ## Project Structure
 
-- `main.py`: Entry point that orchestrates the entire process
-- `github_rate_limit_handler.py`: Manages GitHub API requests and rate limits
-- `data_collector.py`: Collects repository data with balanced sampling
-- `pm_classifier.py`: Classifies project management methodologies
+- `data_collection/`: Data collection components
+  - `main.py`: Entry point for data collection
+  - `github_rate_limit_handler.py`: GitHub API rate limit management
+  - `data_collector.py`: Repository data collection
+  - `pm_classifier.py`: Project management methodology classification
+- `data_analysis/`: Data analysis components
+  - `analysis.py`: Core analysis functions
+  - `visualization.py`: Data visualization tools
+  - `statistical_tests.py`: Statistical analysis
+  - `utils.py`: Utility functions
 - `requirements.txt`: Lists all required dependencies
 - `data/`: Default folder for collected and processed data
 
