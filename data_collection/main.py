@@ -64,7 +64,7 @@ def parse_arguments():
     parser.add_argument(
         '--sample-size', 
         type=int, 
-        default=50,
+        default=250,
         help='Number of repositories to sample (default: 100)'
     )
     parser.add_argument(
