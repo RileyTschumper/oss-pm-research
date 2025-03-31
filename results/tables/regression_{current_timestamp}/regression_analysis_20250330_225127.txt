@@ -1,0 +1,15 @@
+Regression Analysis Results
+Dependent Variable: stars
+Independent Variables: issue_closure_rate, pr_acceptance_rate
+
+Summary Statistics:
+                Metric  Value
+             R-squared 0.0692
+    Adjusted R-squared 0.0397
+Number of Observations     66
+
+Coefficients and P-values:
+          Variable Coefficient P-value
+             const  47906.7566  0.0158
+issue_closure_rate  51347.2692  0.0401
+pr_acceptance_rate -32926.4644  0.2974

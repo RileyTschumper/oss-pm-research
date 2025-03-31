@@ -8,6 +8,32 @@ def load_data(filepath):
     with open(filepath, 'r') as f:
         return json.load(f)
 
+def remove_outliers(df, column, z_threshold=3.0):
+    """
+    Remove outliers from a DataFrame based on z-score of a specific column.
+    
+    Args:
+        df (pandas.DataFrame): DataFrame to filter
+        column (str): Column name to check for outliers
+        z_threshold (float): Z-score threshold for outlier detection
+        
+    Returns:
+        pandas.DataFrame: DataFrame with outliers removed
+    """
+    # Calculate z-scores
+    z_scores = np.abs((df[column] - df[column].mean()) / df[column].std())
+    
+    # Keep rows where z-score is below threshold
+    filtered_df = df[z_scores < z_threshold].copy()
+    
+    # Report number of outliers removed
+    outliers_count = len(df) - len(filtered_df)
+    if outliers_count > 0:
+        print(f"Removed {outliers_count} outliers from '{column}' column using z-score threshold of {z_threshold}")
+        print(f"Max value before removal: {df[column].max():.2f}, after removal: {filtered_df[column].max():.2f}")
+    
+    return filtered_df
+
 def preprocess_data(data):
     """Process raw data into dataframes for analysis."""
     # Create main metrics dataframe
@@ -25,6 +51,9 @@ def preprocess_data(data):
         }
         for repo in data
     ])
+
+    # Remove outliers from growth_rate
+    metrics_df = remove_outliers(metrics_df, 'growth_rate')
     
     # Create interaction data
     interaction_data = pd.DataFrame([
@@ -74,5 +103,9 @@ def preprocess_data(data):
         }
         for repo in data
     ])
+
+    # Remove outliers from growth rates in growth_df
+    growth_df = remove_outliers(growth_df, 'star_growth_rate')
+    growth_df = remove_outliers(growth_df, 'fork_growth_rate')
     
     return metrics_df, interaction_data, community_df, lifecycle_df, growth_df

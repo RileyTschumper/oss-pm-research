@@ -1,0 +1,4 @@
+Statistical Test Results (Combined Data):
+Number of repositories analyzed: 66
+
+{'kanban_vs_agile_scrum': {'t_statistic': np.float64(3.709067978055062), 'p_value': np.float64(0.0004696912201071526), 'significant': np.True_}, 'kanban_vs_waterfall': {'t_statistic': np.float64(-5.181310113783727), 'p_value': np.float64(2.333023544174312e-05), 'significant': np.True_}, 'agile_scrum_vs_waterfall': {'t_statistic': np.float64(-9.45454866940741), 'p_value': np.float64(1.0339673386400057e-11), 'significant': np.True_}, 'ANOVA': {'f_statistic': np.float64(10.26851071354355), 'p_value': np.float64(0.00014061440662251217), 'significant': np.True_}}

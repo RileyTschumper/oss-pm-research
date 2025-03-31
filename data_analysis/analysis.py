@@ -85,6 +85,13 @@ def main():
     plot_development_continuity_by_methodology(lifecycle_df, output_dir / f'development_continuity_combined_{current_timestamp}.png')
     plot_growth_rate_by_age(growth_df, output_dir / f'growth_rate_by_age_combined_{current_timestamp}.png')
 
+    # Example usage
+    regression_results = regression_analysis(
+        data=metrics_df,
+        dependent_var='stars',
+        independent_vars=['issue_closure_rate', 'pr_acceptance_rate'],
+        output_dir='../results/tables/regression_{current_timestamp}'
+    )
     # Run statistical tests
     test_results = run_methodology_comparison_tests(metrics_df)
     

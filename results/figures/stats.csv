@@ -1,0 +1,5 @@
+Comparison,t-statistic,p-value,Significant
+Kanban vs. Agile Scrum,3.71,0.00047,Yes
+Kanban vs. Waterfall,-5.18,0.000023,Yes
+Agile Scrum vs. Waterfall,-9.45,1.03E-11,Yes
+ANOVA,F = 10.27,0.00014,Yes
