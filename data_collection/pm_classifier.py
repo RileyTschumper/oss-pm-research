@@ -75,10 +75,6 @@ class AdvancedMethodologyClassifier:
                 'terms': ['wip limit', 'kanban', 'scrum', 'backlog', 'sprint'],
                 'board_structure': ['backlog', 'ready', 'in progress', 'done'],
                 'principles': ['pull system', 'visualize workflow', 'limit wip']
-            },
-            'ad_hoc': {
-                'terms': [],  # Lack of specific methodology terms
-                'time_patterns': []  # Irregular time patterns
             }
         }
         
@@ -155,57 +151,7 @@ class AdvancedMethodologyClassifier:
         except Exception as e:
             self.logger.error(f"Error extracting text features: {str(e)}")
             return np.zeros((1, 10))  # Return empty feature vector
-    """
-    def extract_text_features(self, repo_data: Dict) -> np.ndarray:
-
-        # Combine relevant text from issues, PRs, and documentation
-        text_content = []
         
-        # Process issue titles and descriptions
-        for issue in repo_data.get('issues', []):
-            text_content.append(issue.get('title', ''))
-            text_content.append(issue.get('body', ''))
-        
-        # Process PR descriptions
-        for pr in repo_data.get('pull_requests', []):
-            text_content.append(pr.get('title', ''))
-            text_content.append(pr.get('body', ''))
-        
-        # Process issue comments
-        for comment in repo_data.get('issue_comments', []):
-            text_content.append(comment.get('body', ''))
-        
-        # Process PR comments
-        for comment in repo_data.get('pull_request_comments', []):
-            text_content.append(comment.get('body', ''))
-        
-        # Process repository description and README
-        info = repo_data.get('info', {})
-        text_content.append(info.get('description', ''))
-        
-        # Combine and process text
-        combined_text = ' '.join(filter(None, text_content))
-        
-        if not combined_text or len(combined_text) < 10:
-            self.logger.warning("Insufficient text content for analysis")
-            return np.zeros((1, 10))  # Return empty feature vector
-        
-        try:
-            # Create feature vector using TF-IDF
-            features = self.vectorizer.fit_transform([combined_text])
-            
-            # If features are too sparse, reduce dimensionality
-            if features.shape[1] > 100:
-                from sklearn.decomposition import TruncatedSVD
-                svd = TruncatedSVD(n_components=min(100, features.shape[1]-1))
-                features = svd.fit_transform(features)
-            
-            return features
-            
-        except Exception as e:
-            self.logger.error(f"Error extracting text features: {str(e)}")
-            return np.zeros((1, 10))  # Return empty feature vector
-    """
     def extract_temporal_features(self, repo_data: Dict) -> np.ndarray:
         """
         Analyze temporal patterns in issues and releases.
@@ -315,22 +261,6 @@ class AdvancedMethodologyClassifier:
         features = []
         
         try:
-            """
-            # Analyze project board structure
-            board_columns = []
-            for project in repo_data.get('projects', []):
-                for column in project.get('columns', []):
-                    self.logger.info(f"in project board structure")
-                    col_name = column.get('name', '').lower()
-                    if col_name:
-                        board_columns.append(col_name)
-            
-            # Calculate similarity to known methodology patterns
-            for methodology, patterns in self.methodology_patterns.items():
-                board_pattern = patterns.get('board_structure', [])
-                similarity = self._calculate_sequence_similarity(board_columns, board_pattern)
-                features.append(similarity)
-            """
             # Analyze issue labels
             labels = []
             for issue in repo_data.get('issues', []):
